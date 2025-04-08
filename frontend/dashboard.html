@@ -1,0 +1,56 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HealthHub Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+    <h1 class="text-2xl font-bold">HealthHub</h1>
+    <div class="flex items-center gap-4">
+      <span id="username" class="font-medium"></span>
+      <button onclick="logout()" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">Logout</button>
+    </div>
+  </nav>
+
+  <main class="p-10 text-center">
+    <h2 class="text-3xl font-bold mb-4">Welcome to HealthHub!</h2>
+    <p class="text-lg mb-6">You are now logged in. Use the services below:</p>
+
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <a href="#consultation" class="bg-white p-6 rounded shadow hover:bg-blue-50">
+        <h3 class="text-xl font-semibold mb-2">Consult a Doctor</h3>
+        <p>Start video consultations easily.</p>
+      </a>
+      <a href="#medicine" class="bg-white p-6 rounded shadow hover:bg-blue-50">
+        <h3 class="text-xl font-semibold mb-2">Order Medicines</h3>
+        <p>Fast and reliable delivery.</p>
+      </a>
+      <a href="#labs" class="bg-white p-6 rounded shadow hover:bg-blue-50">
+        <h3 class="text-xl font-semibold mb-2">Book Lab Tests</h3>
+        <p>Home sample collection available.</p>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      window.location.href = 'index.html';
+    } else {
+      document.getElementById('username').textContent = user.name;
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>

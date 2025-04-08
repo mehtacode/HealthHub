@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthHub | Your Digital Healthcare Partner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 text-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">HealthHub</h1>
+      <button id="navbar-toggle" class="lg:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div id="navbar-menu"
+      class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-6 flex-col lg:flex-row space-y-2 lg:space-y-0 mt-4 lg:mt-0 text-center font-medium">
+      <a href="#home" class="hover:underline">Home</a>
+      <a href="#doctors" class="hover:underline">Doctors</a>
+      <a href="#consultation" class="hover:underline">Consultation</a>
+      <a href="#medicine" class="hover:underline">Medicines</a>
+      <a href="#labs" class="hover:underline">Lab Tests</a>
+      <a href="#signup" class="hover:underline">Sign Up</a>
+      <a href="#login" class="hover:underline">Login</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="bg-blue-50 py-16 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <!-- Text content -->
+      <div>
+        <h2 class="text-4xl lg:text-5xl font-bold text-blue-700 mb-4">Expert Healthcare at Your Fingertips</h2>
+        <p class="text-lg text-gray-700 mb-6">Book appointments, consult top doctors online, order medicines, and more with HealthHub.</p>
+        <a href="#doctors" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md">
+          Get Started
+        </a>
+      </div>
+
+      <!-- Image -->
+      <div>
+        <img src="image.jpg" alt="Healthcare" class="w-full rounded-lg shadow-lg" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctor Search -->
+  <section id="doctors" class="p-10 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-semibold mb-6">Search Doctors</h2>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <input type="text" id="doctorSearch" placeholder="Search by name or specialty"
+          class="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <button onclick="searchDoctors()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
+          Search
+        </button>
+      </div>
+      <div id="doctorResults" class="mt-6 space-y-4"></div>
+    </div>
+  </section>
+
+  <!-- Online Consultation -->
+  <section id="consultation" class="p-10 bg-gray-50 text-center">
+    <h2 class="text-3xl font-semibold mb-4">Online Consultation</h2>
+    <p class="mb-4">Connect with verified doctors through secure video calls.</p>
+    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md">Start Consultation</button>
+  </section>
+
+  <!-- Medicine Ordering -->
+  <section id="medicine" class="p-10 bg-white text-center">
+    <h2 class="text-3xl font-semibold mb-4">Order Medicines</h2>
+    <p class="mb-4">Fast delivery of prescribed medicines right to your doorstep.</p>
+    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">Order Now</button>
+  </section>
+
+  <!-- Lab Tests -->
+  <section id="labs" class="p-10 bg-gray-50 text-center">
+    <h2 class="text-3xl font-semibold mb-4">Book Lab Tests</h2>
+    <p class="mb-4">Easily book diagnostic tests with home sample collection.</p>
+    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">Book Test</button>
+  </section>
+
+  <!-- Sign Up Section (Hidden by default) -->
+  <section id="signup" class="p-10 bg-white hidden">
+    <div class="max-w-md mx-auto">
+      <h2 class="text-3xl font-semibold mb-6">Create an Account</h2>
+      <form id="signupForm" class="space-y-4">
+        <input type="text" id="signupName" placeholder="Full Name"
+          class="w-full p-3 border border-gray-300 rounded-md" />
+        <input type="email" id="signupEmail" placeholder="Email Address"
+          class="w-full p-3 border border-gray-300 rounded-md" />
+        <input type="password" id="signupPassword" placeholder="Password"
+          class="w-full p-3 border border-gray-300 rounded-md" />
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Login Section (Hidden by default) -->
+  <section id="login" class="p-10 bg-gray-50 hidden">
+    <div class="max-w-md mx-auto">
+      <h2 class="text-3xl font-semibold mb-6">Login</h2>
+      <form id="loginForm" class="space-y-4">
+        <input type="email" id="loginEmail" placeholder="Email Address"
+          class="w-full p-3 border border-gray-300 rounded-md" />
+        <input type="password" id="loginPassword" placeholder="Password"
+          class="w-full p-3 border border-gray-300 rounded-md" />
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
+          Login
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 p-4 text-white text-center">
+    <p>&copy; 2025 HealthHub. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Navbar toggle
+    const toggleBtn = document.getElementById('navbar-toggle');
+    const menu = document.getElementById('navbar-menu');
+    toggleBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('flex');
+    });
+
+    // Show/hide Sign Up and Login sections
+    document.querySelector('a[href="#signup"]').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('signup').classList.remove('hidden');
+      document.getElementById('login').classList.add('hidden');
+      document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.querySelector('a[href="#login"]').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('login').classList.remove('hidden');
+      document.getElementById('signup').classList.add('hidden');
+      document.getElementById('login').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Signup
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+
+      axios.post('http://localhost:5000/api/users/signup', { name, email, password })
+        .then(response => alert('User registered successfully'))
+        .catch(error => alert('Error: ' + error.response.data.error));
+    });
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      axios.post('http://localhost:5000/api/users/login', { email, password })
+        .then(response => {
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          window.location.href = 'dashboard.html';
+        })
+        .catch(error => alert('Error: ' + error.response.data.error));
+    });
+
+    // Doctor search
+    function searchDoctors() {
+      const query = document.getElementById('doctorSearch').value;
+      axios.get(`http://localhost:5000/api/doctors?search=${query}`)
+        .then(response => {
+          const results = document.getElementById('doctorResults');
+          results.innerHTML = '';
+          response.data.forEach(doc => {
+            results.innerHTML += `
+              <div class="p-4 border rounded-md shadow-sm">
+                <h3 class="text-xl font-bold">${doc.name}</h3>
+                <p>Specialty: ${doc.specialty}</p>
+                <p>Experience: ${doc.experience} years</p>
+                <p>Fees: ₹${doc.fees}</p>
+              </div>
+            `;
+          });
+        })
+        .catch(error => alert('Error: ' + error.response.data.error));
+    }
+  </script>
+</body>
+
+</html>
